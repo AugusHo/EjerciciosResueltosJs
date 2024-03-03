@@ -16,15 +16,16 @@ router.get('/', async (req, res) => {
 });
 
 //ruta que devuelve los detalles de un libro específico según su ID.
-/*router.get('/:id', async (req, res) => {
-    try {
-        const Libro = await Libro.findById(req.params.id);
+router.get('/:id', async (req, res) => {
 
-        res.json(Libro);
+    try {
+        const result = await Libro.findOne({ _id: req.params.id });
+        res.json(result);
+
     } catch (error) {
         res.status(404).json({error: "Error en la obtencion del libro."})
     }
-});*/
+});
 
 
 //ruta para crear un libro.
@@ -59,7 +60,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         await Libro.findByIdAndDelete(req.params.id);
-        res.json({message: 'Libro eliminado correctamente.'})
+        res.json({message: 'Libro eliminado correctamente.'});
     } catch (error) {
         
     }
