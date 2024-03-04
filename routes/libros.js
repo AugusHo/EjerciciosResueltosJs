@@ -20,6 +20,10 @@ router.get('/:id', async (req, res) => {
 
     try {
         const result = await Libro.findOne({ _id: req.params.id });
+
+        if (!result) {
+            return res.status(404).json({error: "Error en la obtencion del libro."})
+        };
         res.json(result);
 
     } catch (error) {
